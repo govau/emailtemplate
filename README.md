@@ -12,7 +12,7 @@ However, you don't want to hand-code the email template parts. Most notably, you
 
 ## Usage and examples
 
-[Read the documentation](https://godoc.org/govau/emailtemplate).
+[Read the documentation](https://godoc.org/github.com/govau/emailtemplate).
 
 ## Development
 
