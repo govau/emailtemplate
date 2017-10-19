@@ -11,8 +11,8 @@ type Key string
 // Getter is a map of template keys to Template that allows looking up a
 // given template by key.
 type Getter struct {
-	m            map[Key]*Template
-	sync.RWMutex // RWMutex protects m.
+	m  map[Key]*Template
+	mu sync.RWMutex // mu protects m.
 }
 
 // newGetter makes a new initialized Getter.
@@ -21,27 +21,26 @@ func newGetter() *Getter {
 }
 
 // Get returns the Template at key k, if it exists.
-func (ts *Getter) Get(k Key) (*Template, bool) {
-	ts.RLock()
-	t, ok := ts.m[k]
-	ts.RUnlock()
+func (g *Getter) Get(k Key) (*Template, bool) {
+	g.mu.RLock()
+	defer g.mu.RUnlock()
+
+	t, ok := g.m[k]
 	return t, ok
 }
 
 // set puts the Template in the map at key k.
-func (ts *Getter) set(k Key, t *Template) {
-	ts.Lock()
-	ts.m[k] = t
-	ts.Unlock()
+func (g *Getter) set(k Key, t *Template) {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+
+	g.m[k] = t
 }
 
 // len returns the number of templates in the map.
-func (ts *Getter) len() int {
-	if ts == nil {
-		return 0
-	}
-	ts.RLock()
-	l := len(ts.m)
-	ts.RUnlock()
-	return l
+func (g *Getter) len() int {
+	g.mu.RLock()
+	defer g.mu.RUnlock()
+
+	return len(g.m)
 }

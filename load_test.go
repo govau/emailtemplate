@@ -97,9 +97,9 @@ func TestLoaderLoad(t *testing.T) {
 				if tt.err != nil {
 					t.Fatalf("load(): err = nil, want %v", tt.err)
 				}
-			}
-			if g.len() != tt.found {
-				t.Errorf("load(): getter.len() = %d, want %d", g.len(), tt.found)
+				if g.len() != tt.found {
+					t.Errorf("load(): getter.len() = %d, want %d", g.len(), tt.found)
+				}
 			}
 		})
 	}

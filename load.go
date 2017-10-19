@@ -17,8 +17,8 @@ const (
 	TextFile = "text.txt"
 )
 
-// loader is a type which loads email templates located at rootPath.
-type loader struct {
+// Loader is a type which loads email templates located at rootPath.
+type Loader struct {
 	rootPath       string
 	subjectFuncMap texttemplate.FuncMap
 	htmlFuncMap    template.FuncMap
@@ -26,8 +26,8 @@ type loader struct {
 	logger         *log.Logger
 }
 
-func newLoader(opts ...LoaderOpt) *loader {
-	l := &loader{}
+func newLoader(opts ...LoaderOpt) *Loader {
+	l := &Loader{}
 	for _, opt := range opts {
 		opt(l)
 	}
@@ -62,7 +62,7 @@ func Load(opts ...LoaderOpt) (*Getter, error) {
 
 // load loads a map of email templates from the given templatePaths.
 // See loader.loadParts.
-func (l *loader) load(templatePaths map[Key]string) (*Getter, error) {
+func (l *Loader) load(templatePaths map[Key]string) (*Getter, error) {
 	g := newGetter()
 
 	for k, tp := range templatePaths {
@@ -82,7 +82,7 @@ func (l *loader) load(templatePaths map[Key]string) (*Getter, error) {
 // the type of template (either subject.txt, html.html or text.txt).
 // Both the subject and HTML templates are required however the text template
 // does not have to exist.
-func (l *loader) loadParts(templatePath string) (*Template, error) {
+func (l *Loader) loadParts(templatePath string) (*Template, error) {
 	st, err := texttemplate.
 		New(SubjectFile).
 		Funcs(l.subjectFuncMap).
