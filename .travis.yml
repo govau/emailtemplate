@@ -1,5 +1,5 @@
 language: go
 go:
- - 1.9
- - tip
+  - 1.9.x
+  - tip
 script: go test -race ./...

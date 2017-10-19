@@ -1,4 +1,4 @@
-# emailtemplate
+# emailtemplate &middot; [![Travis-CI](https://travis-ci.org/govau/emailtemplate.svg)](https://travis-ci.org/govau/emailtemplate) [![GoDoc](https://godoc.org/github.com/govau/emailtemplate?status.svg)](http://godoc.org/github.com/govau/emailtemplate) [![Report card](https://goreportcard.com/badge/github.com/govau/emailtemplate)](https://goreportcard.com/report/github.com/govau/emailtemplate)
 
 `emailtemplate` is a Go package for loading and executing email templates. An email template is a directory which consists of a subject, HTML and text Go template file.
 
