@@ -50,9 +50,7 @@ func Load(opts ...LoaderOpt) (*Getter, error) {
 		if !info.IsDir() {
 			return nil
 		}
-		log.Println(path)
 		base := filepath.Base(path)
-		log.Println(base)
 		templatePaths[Key(base)] = path
 		return nil
 	}); err != nil {
