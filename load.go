@@ -17,7 +17,7 @@ const (
 	TextFile = "text.txt"
 )
 
-// Loader is a type which loads email templates located at rootPath.
+// Loader is a type which loads email templates located at a root path.
 type Loader struct {
 	rootPath       string
 	subjectFuncMap texttemplate.FuncMap
